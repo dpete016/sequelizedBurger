@@ -1,22 +1,19 @@
 var express = require("express");
-
 var router = express.Router();
-
-var burger = require("..//models/burger.js");
+var db = require("../models")
 
 router.get("/", function(req,res) {
-    burger.all(function(data) {
-        var hbsObject = {
-            burger: data
-        };
-        console.log(hbsObject);
-        res.render("index", { burger: data });
-    });
+    db.Burger.findAll()
+        .then(function(burger) {
+            console.log(burger)
+            
+        });
+    
 });
 
 router.post("/api/burgers", function(req, res) {
     console.log("dp",req.body)
-    burger.create([
+    db.Burger.create([
         "burgername", "devoured"
     ], [req.body.burgername, req.body.devoured], 
         
@@ -30,7 +27,7 @@ router.put("/api/burgers/:id", function(req, res) {
 
     console.log("condition", condition);
 
-    burger.update({
+    db.Burger.update({
         devoured: req.body.devoured
     }, condition, function() {
        res.json(true);
@@ -40,7 +37,7 @@ router.put("/api/burgers/:id", function(req, res) {
 router.delete("/api/burgers/:id", function(req,res) {
     var condition = "id = " + req.params.id;
 
-    burger.delete(condition, function(result) {
+    db.Burger.delete(condition, function(result) {
         if (result.affectedRows == 0) {
 
             return res.status(404).end();
