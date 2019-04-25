@@ -1,0 +1,63 @@
+{{!-- 
+<audio id="Eatingnoise">
+    <source src="/assets/sound/Om nom nom nom.mp3" type="audio.mp3">
+</audio> --}}
+
+<div class="container">
+    <div class="text center" id="hotdog">
+       <img src="/assets/img/burger.gif" alt="burger.gif" />
+       <h1> Nom-Da-Burger! </h1>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 text center" id="eater">
+            <div class="row">
+                {{#each burger}}
+                 {{#unless this.devoured}}
+                <div class="col-md-12 text center">
+                    <pre>{{this.id}}. {{this.burgername}}
+                    </pre>
+
+                </div> 
+                <div class="col-md-12 text-center ">
+                    <form class="nomburger-btn" data-id={{this.id}}>
+                        <input input type="hidden" class="#burger" type="text" value={{this.id}}>
+                        
+                        <button type="click" class="btn btn-danger" onclick="playAudio()">Om Nom Nom!</button>
+                    </form>
+                </div>
+                {{/unless}}
+                {{/each}} 
+            </div>
+        </div>
+        <div class="col-md-6 text-center"class="eater">
+            {{#each burger}}
+               {{#if this.devoured}}
+                 <pre>{{this.id}}. {{this.burgername}}
+                    </pre>
+                 {{!-- <input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly> --}}
+                {{/if}}
+                {{/each}} 
+        </div>
+    </div>
+   <br>
+
+   <p>Put in a burger you wanna chomp on and click the Cook button!</p>
+   <div class="row">
+       <div class="col-md-4 text-center enter_section">
+            <form class="create-form">
+                <input type="text" class="form-control" name="burgername" id="newburger">
+            </form>
+            <button class="btn btn-danger" id="burgerenter" value="Cook Burger">Add Burger</button>
+       </div>
+   </div>
+</div>
+
+
+{{!-- <script>
+    var noise = document.getElementById("Eatingnoise");
+    function playAudio() {
+        noise.play();
+    }
+</script> --}}

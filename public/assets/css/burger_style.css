@@ -1,0 +1,12 @@
+.container {
+ background-color: rgb(255, 204, 65);
+ margin: auto;
+ text-align: center;
+ color: red;
+}
+
+.enter_section{
+    float: none;
+    margin: 0 auto;
+}
+
